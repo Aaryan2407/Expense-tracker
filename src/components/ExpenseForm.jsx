@@ -1,25 +1,26 @@
-import React from 'react'
+import React from "react";
 
 export default function ExpenseForm({ setExpenses }) {
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const expense = { ...getFormData(e.target), id: crypto.randomUUID() }
-    setExpenses((prevState) => [...prevState, expense])
-    e.target.reset()
-  }
+    e.preventDefault();
+    const expense = { ...getFormData(e.target), id: crypto.randomUUID() };
+    setExpenses((prevState) => [...prevState, expense]);
+    e.target.reset();
+  };
 
   const getFormData = (form) => {
-    const formData = new FormData(form)
-    const data = {}
+    const formData = new FormData(form);
+    const data = {};
     for (const [key, value] of formData.entries()) {
-      data[key] = value
+      data[key] = value;
     }
-    return data
-  }
+    return data;
+  };
 
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
       <div className="input-container">
+        <h1>test</h1>
         <label htmlFor="title">Title</label>
         <input id="title" name="title" />
       </div>
@@ -42,5 +43,5 @@ export default function ExpenseForm({ setExpenses }) {
       </div>
       <button className="add-btn">Add</button>
     </form>
-  )
+  );
 }
