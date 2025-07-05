@@ -20,7 +20,6 @@ export default function ExpenseForm({ setExpenses }) {
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
       <div className="input-container">
-        <h1>test</h1>
         <label htmlFor="title">Title</label>
         <input id="title" name="title" />
       </div>
