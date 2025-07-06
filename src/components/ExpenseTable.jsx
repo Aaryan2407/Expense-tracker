@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function ExpenseTable({ expenses }) {
   return (
@@ -42,7 +42,7 @@ export default function ExpenseTable({ expenses }) {
         </tr>
       </thead>
       <tbody>
-        {expenses.map(({id, title, category, amount}) => (
+        {expenses.map(({ id, title, category, amount }) => (
           <tr key={id}>
             <td>{title}</td>
             <td>{category}</td>
@@ -56,5 +56,5 @@ export default function ExpenseTable({ expenses }) {
         </tr>
       </tbody>
     </table>
-  )
+  );
 }
