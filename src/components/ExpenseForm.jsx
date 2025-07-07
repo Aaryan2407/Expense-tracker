@@ -50,6 +50,19 @@ export default function ExpenseForm({ setExpenses }) {
     });
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log({ name, value });
+    setExpense((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  //  handle change is used to replace logic below used on every form field
+  // onChange={(e) =>
+  //           setExpense((prevState) => ({ ...prevState, title: e.target.value }))
+  //         }
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
       <div className="input-container">
@@ -59,9 +72,7 @@ export default function ExpenseForm({ setExpenses }) {
           name="title"
           // ref={titleRef}
           value={expense.title}
-          onChange={(e) =>
-            setExpense((prevState) => ({ ...prevState, title: e.target.value }))
-          }
+          onChange={handleChange}
         />
       </div>
       <div className="input-container">
@@ -71,12 +82,7 @@ export default function ExpenseForm({ setExpenses }) {
           name="category"
           value={expense.category}
           // ref={categoryRef}
-          onChange={(e) =>
-            setExpense((prevState) => ({
-              ...prevState,
-              category: e.target.value,
-            }))
-          }
+          onChange={handleChange}
         >
           <option value="" hidden>
             Select Category
@@ -95,12 +101,7 @@ export default function ExpenseForm({ setExpenses }) {
           name="amount"
           value={expense.amount}
           // ref={amountRef}
-          onChange={(e) =>
-            setExpense((prevState) => ({
-              ...prevState,
-              amount: e.target.value,
-            }))
-          }
+          onChange={handleChange}
         />
       </div>
       <button className="add-btn">Add</button>
