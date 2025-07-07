@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 export default function ExpenseForm({ setExpenses }) {
   // ✅ One Way of handling Form Data
@@ -25,11 +25,23 @@ export default function ExpenseForm({ setExpenses }) {
     amount: "",
   });
 
+  // const titleRef = useRef();
+  // const categoryRef = useRef();
+  // const amountRef = useRef();
+
+  // const myRef = useRef();
+  // console.log(myRef);
   const handleSubmit = (e) => {
     e.preventDefault();
     setExpenses((prevState) => [
       ...prevState,
       { ...expense, id: crypto.randomUUID() },
+      // {
+      //   title: titleRef.current.value,
+      //   categoryRef: categoryRef.current.value,
+      //   amountRef: amountRef.current.value,
+      //   id: crypto.randomUUID(),
+      // }
     ]);
     setExpense({
       title: "",
@@ -45,6 +57,7 @@ export default function ExpenseForm({ setExpenses }) {
         <input
           id="title"
           name="title"
+          // ref={titleRef}
           value={expense.title}
           onChange={(e) =>
             setExpense((prevState) => ({ ...prevState, title: e.target.value }))
@@ -57,6 +70,7 @@ export default function ExpenseForm({ setExpenses }) {
           id="category"
           name="category"
           value={expense.category}
+          // ref={categoryRef}
           onChange={(e) =>
             setExpense((prevState) => ({
               ...prevState,
@@ -80,6 +94,7 @@ export default function ExpenseForm({ setExpenses }) {
           id="amount"
           name="amount"
           value={expense.amount}
+          // ref={amountRef}
           onChange={(e) =>
             setExpense((prevState) => ({
               ...prevState,
