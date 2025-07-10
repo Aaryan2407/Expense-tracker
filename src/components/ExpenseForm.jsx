@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-
+import errorImg from "../assets/error_1008930.png";
 export default function ExpenseForm({ setExpenses }) {
   // ✅ One Way of handling Form Data
   // const handleSubmit = (e) => {
@@ -24,15 +24,36 @@ export default function ExpenseForm({ setExpenses }) {
     category: "",
     amount: "",
   });
-
+  const [errors, setError] = useState({});
   // const titleRef = useRef();
   // const categoryRef = useRef();
   // const amountRef = useRef();
 
   // const myRef = useRef();
   // console.log(myRef);
+
+  const validate = (formData) => {
+    const errorsData = {};
+    if (!formData.title) {
+      errorsData.title = "Title is required";
+    }
+    if (!formData.category) {
+      errorsData.category = "Category is required";
+    }
+    if (!formData.amount) {
+      errorsData.amount = "Amount is required";
+    }
+
+    setError(errorsData);
+    return errorsData;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validateExpenseError = validate(expense);
+    if (Object.keys(validateExpenseError).length) {
+      return console.log("Form is invalid");
+    }
     setExpenses((prevState) => [
       ...prevState,
       { ...expense, id: crypto.randomUUID() },
@@ -57,6 +78,7 @@ export default function ExpenseForm({ setExpenses }) {
       ...prev,
       [name]: value,
     }));
+    setError({});
   };
 
   //  handle change is used to replace logic below used on every form field
@@ -74,6 +96,14 @@ export default function ExpenseForm({ setExpenses }) {
           value={expense.title}
           onChange={handleChange}
         />
+        <p className="error">
+          {errors.title && (
+            <>
+              <img className="errorImage" src={errorImg} alt="error" />
+              {errors.title}
+            </>
+          )}
+        </p>
       </div>
       <div className="input-container">
         <label htmlFor="category">Category</label>
@@ -93,6 +123,14 @@ export default function ExpenseForm({ setExpenses }) {
           <option value="Education">Education</option>
           <option value="Medicine">Medicine</option>
         </select>
+        <p className="error">
+          {errors.category && (
+            <>
+              <img className="errorImage" src={errorImg} alt="error" />
+              {errors.category}
+            </>
+          )}
+        </p>
       </div>
       <div className="input-container">
         <label htmlFor="amount">Amount</label>
@@ -103,6 +141,14 @@ export default function ExpenseForm({ setExpenses }) {
           // ref={amountRef}
           onChange={handleChange}
         />
+        <p className="error">
+          {errors.amount && (
+            <>
+              <img className="errorImage" src={errorImg} alt="error" />
+              {errors.amount}
+            </>
+          )}
+        </p>
       </div>
       <button className="add-btn">Add</button>
     </form>
