@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import errorImg from "../assets/error_1008930.png";
+import Input from "./Input";
 export default function ExpenseForm({ setExpenses }) {
   // ✅ One Way of handling Form Data
   // const handleSubmit = (e) => {
@@ -87,24 +88,22 @@ export default function ExpenseForm({ setExpenses }) {
   //         }
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
-      <div className="input-container">
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          name="title"
-          // ref={titleRef}
-          value={expense.title}
-          onChange={handleChange}
-        />
-        <p className="error">
+      <Input
+        label="Title"
+        id="title"
+        name="title"
+        value={expense.title}
+        onChange={handleChange}
+        errors={errors.title}
+      />
+      {/* <p className="error">
           {errors.title && (
             <>
               <img className="errorImage" src={errorImg} alt="error" />
               {errors.title}
             </>
           )}
-        </p>
-      </div>
+        </p> */}
       <div className="input-container">
         <label htmlFor="category">Category</label>
         <select
@@ -132,24 +131,14 @@ export default function ExpenseForm({ setExpenses }) {
           )}
         </p>
       </div>
-      <div className="input-container">
-        <label htmlFor="amount">Amount</label>
-        <input
-          id="amount"
-          name="amount"
-          value={expense.amount}
-          // ref={amountRef}
-          onChange={handleChange}
-        />
-        <p className="error">
-          {errors.amount && (
-            <>
-              <img className="errorImage" src={errorImg} alt="error" />
-              {errors.amount}
-            </>
-          )}
-        </p>
-      </div>
+      <Input
+        label="Amount"
+        id="amount"
+        name="amount"
+        value={expense.amount}
+        onChange={handleChange}
+        errors={errors.amount}
+      />
       <button className="add-btn">Add</button>
     </form>
   );
